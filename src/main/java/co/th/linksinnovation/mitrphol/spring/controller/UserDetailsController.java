@@ -9,6 +9,7 @@ import co.th.linksinnovation.mitrphol.spring.model.UserDetails;
 import co.th.linksinnovation.mitrphol.spring.repository.UserDetailsRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Jirawong Wongdokpuang <jirawong@linksinnovation.com>
  */
 @RestController
+@Profile("dev")
 public class UserDetailsController {
     
     @Autowired
