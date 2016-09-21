@@ -5,6 +5,7 @@
  */
 package co.th.linksinnovation.mitrphol.spring.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,27 +19,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+    
+    
+    @Autowired
+    private CustomAuthentication customAuthentication;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/api/secured").hasAnyRole("ADMIN")
+                .authorizeRequests().antMatchers("/api/secured").hasRole("ADMIN")
                 .and().authorizeRequests().anyRequest().permitAll()
                 .and().formLogin();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("u")
-                .password("p")
-                .roles("USER")
-                .and()
-                .withUser("a")
-                .password("p")
-                .roles("ADMIN");
+        auth.authenticationProvider(customAuthentication);
     }
+
+    
     
 }
