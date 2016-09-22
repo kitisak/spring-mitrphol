@@ -6,7 +6,6 @@
 package co.th.linksinnovation.mitrphol.spring.config;
 
 import co.th.linksinnovation.mitrphol.spring.dto.Auth;
-import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
